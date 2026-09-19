@@ -1,0 +1,79 @@
+<Application
+    x:Class="LiquidGlassPoC.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="PrimaryTextBrush" Color="#E5131823" />
+                    <SolidColorBrush x:Key="SecondaryTextBrush" Color="#99131823" />
+                    <SolidColorBrush x:Key="HairlineBrush" Color="#36FFFFFF" />
+                    <SolidColorBrush x:Key="AppAccentBrush" Color="#FF2267F2" />
+                    <SolidColorBrush x:Key="OrbBlueBrush" Color="#B9418CFF" />
+                    <SolidColorBrush x:Key="OrbPurpleBrush" Color="#A37A55FF" />
+                    <SolidColorBrush x:Key="OrbOrangeBrush" Color="#AFFF8C42" />
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="PrimaryTextBrush" Color="#F5F8FF" />
+                    <SolidColorBrush x:Key="SecondaryTextBrush" Color="#B5D8E0EF" />
+                    <SolidColorBrush x:Key="HairlineBrush" Color="#2FFFFFFF" />
+                    <SolidColorBrush x:Key="AppAccentBrush" Color="#FF70A5FF" />
+                    <SolidColorBrush x:Key="OrbBlueBrush" Color="#8D247AFF" />
+                    <SolidColorBrush x:Key="OrbPurpleBrush" Color="#80683EFF" />
+                    <SolidColorBrush x:Key="OrbOrangeBrush" Color="#7FFF762B" />
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="HighContrast">
+                    <SolidColorBrush x:Key="PrimaryTextBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+                    <SolidColorBrush x:Key="SecondaryTextBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+                    <SolidColorBrush x:Key="HairlineBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+                    <SolidColorBrush x:Key="AppAccentBrush" Color="{ThemeResource SystemColorHighlightColor}" />
+                    <SolidColorBrush x:Key="OrbBlueBrush" Color="Transparent" />
+                    <SolidColorBrush x:Key="OrbPurpleBrush" Color="Transparent" />
+                    <SolidColorBrush x:Key="OrbOrangeBrush" Color="Transparent" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+
+            <AcrylicBrush
+                x:Key="GlassSurfaceBrush"
+                AlwaysUseFallback="False"
+                FallbackColor="#F1F3F8"
+                TintColor="#F5F8FF"
+                TintLuminosityOpacity="0.72"
+                TintOpacity="0.46" />
+
+            <AcrylicBrush
+                x:Key="GlassDenseBrush"
+                AlwaysUseFallback="False"
+                FallbackColor="#E9EDF5"
+                TintColor="#EEF3FF"
+                TintLuminosityOpacity="0.82"
+                TintOpacity="0.66" />
+
+            <Style x:Key="RoundIconButtonStyle" TargetType="Button">
+                <Setter Property="MinWidth" Value="42" />
+                <Setter Property="MinHeight" Value="42" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="CornerRadius" Value="21" />
+                <Setter Property="Background" Value="#16FFFFFF" />
+                <Setter Property="BorderBrush" Value="#24FFFFFF" />
+                <Setter Property="BorderThickness" Value="1" />
+            </Style>
+
+            <Style x:Key="NavigationPillStyle" TargetType="Button">
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="Padding" Value="14,11" />
+                <Setter Property="CornerRadius" Value="16" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

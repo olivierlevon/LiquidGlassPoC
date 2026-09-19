@@ -1,0 +1,414 @@
+<Window
+    x:Class="LiquidGlassPoC.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:LiquidGlassPoC.Controls"
+    Title="Liquid Glass PoC">
+
+    <Grid x:Name="RootContent" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Custom title bar. -->
+        <Grid
+            x:Name="AppTitleBar"
+            Grid.Row="0"
+            Padding="18,0,150,0"
+            Background="Transparent">
+            <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                <Border Width="24" Height="24" CornerRadius="8" Background="{ThemeResource AppAccentBrush}">
+                    <Image Source="ms-appx:///Assets/AppIcon.svg" Stretch="UniformToFill" />
+                </Border>
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontSize="13"
+                    FontWeight="SemiBold"
+                    Foreground="{ThemeResource PrimaryTextBrush}"
+                    Text="Liquid Glass Laboratory" />
+                <Border
+                    Margin="4,0,0,0"
+                    Padding="8,3"
+                    Background="#18FFFFFF"
+                    BorderBrush="#28FFFFFF"
+                    BorderThickness="1"
+                    CornerRadius="9">
+                    <TextBlock FontSize="10" FontWeight="SemiBold" Text="PoC" />
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <!-- Colored content below the glass makes blur and translucency visible. -->
+            <Canvas IsHitTestVisible="False" Opacity="0.88">
+                <Ellipse
+                    Canvas.Left="180"
+                    Canvas.Top="-180"
+                    Width="520"
+                    Height="520"
+                    Fill="{ThemeResource OrbBlueBrush}" />
+                <Ellipse
+                    Canvas.Left="760"
+                    Canvas.Top="40"
+                    Width="390"
+                    Height="390"
+                    Fill="{ThemeResource OrbPurpleBrush}" />
+                <Ellipse
+                    Canvas.Left="510"
+                    Canvas.Top="480"
+                    Width="460"
+                    Height="460"
+                    Fill="{ThemeResource OrbOrangeBrush}" />
+            </Canvas>
+
+            <Grid Margin="18,8,18,18">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="230" />
+                    <ColumnDefinition Width="18" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Dense glass navigation rail. -->
+                <Border
+                    Grid.Column="0"
+                    Padding="14"
+                    Background="{ThemeResource GlassDenseBrush}"
+                    BorderBrush="{ThemeResource HairlineBrush}"
+                    BorderThickness="1"
+                    CornerRadius="28">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Margin="6,10,6,22" Spacing="6">
+                            <TextBlock
+                                FontSize="26"
+                                FontWeight="SemiBold"
+                                Foreground="{ThemeResource PrimaryTextBrush}"
+                                Text="Atelier" />
+                            <TextBlock
+                                FontSize="12"
+                                Foreground="{ThemeResource SecondaryTextBrush}"
+                                Text="Matériaux adaptatifs Windows" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Spacing="6">
+                            <Button
+                                x:Name="OverviewNavigationButton"
+                                Tag="Overview"
+                                Click="NavigationButton_Click"
+                                Style="{StaticResource NavigationPillStyle}">
+                                <StackPanel Orientation="Horizontal" Spacing="12">
+                                    <FontIcon Glyph="&#xE80F;" FontSize="16" />
+                                    <TextBlock Text="Vue d’ensemble" />
+                                </StackPanel>
+                            </Button>
+                            <Button
+                                x:Name="MaterialsNavigationButton"
+                                Tag="Materials"
+                                Click="NavigationButton_Click"
+                                Style="{StaticResource NavigationPillStyle}">
+                                <StackPanel Orientation="Horizontal" Spacing="12">
+                                    <FontIcon Glyph="&#xE790;" FontSize="16" />
+                                    <TextBlock Text="Matériaux" />
+                                </StackPanel>
+                            </Button>
+                            <Button
+                                x:Name="MotionNavigationButton"
+                                Tag="Motion"
+                                Click="NavigationButton_Click"
+                                Style="{StaticResource NavigationPillStyle}">
+                                <StackPanel Orientation="Horizontal" Spacing="12">
+                                    <FontIcon Glyph="&#xE945;" FontSize="16" />
+                                    <TextBlock Text="Mouvement" />
+                                </StackPanel>
+                            </Button>
+                            <Button
+                                x:Name="AccessibilityNavigationButton"
+                                Tag="Accessibility"
+                                Click="NavigationButton_Click"
+                                Style="{StaticResource NavigationPillStyle}">
+                                <StackPanel Orientation="Horizontal" Spacing="12">
+                                    <FontIcon Glyph="&#xE7F8;" FontSize="16" />
+                                    <TextBlock Text="Accessibilité" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+
+                        <controls:LiquidGlassCard
+                            x:Name="SidebarStatusCard"
+                            Grid.Row="2"
+                            Padding="14"
+                            CornerRadius="18">
+                            <StackPanel Spacing="6">
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <Ellipse Width="8" Height="8" Fill="#63E69C" />
+                                    <TextBlock FontSize="12" FontWeight="SemiBold" Text="Rendu actif" />
+                                </StackPanel>
+                                <TextBlock
+                                    x:Name="StatusText"
+                                    FontSize="11"
+                                    Foreground="{ThemeResource SecondaryTextBrush}"
+                                    Text="Mica + Acrylic"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                        </controls:LiquidGlassCard>
+                    </Grid>
+                </Border>
+
+                <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
+                    <Grid Padding="10,10,12,24">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="24" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="18" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Spacing="7">
+                                <TextBlock
+                                    x:Name="PageTitleText"
+                                    FontSize="38"
+                                    FontWeight="SemiBold"
+                                    Foreground="{ThemeResource PrimaryTextBrush}"
+                                    Text="Liquid Glass, version Windows" />
+                                <TextBlock
+                                    x:Name="PageSubtitleText"
+                                    MaxWidth="710"
+                                    FontSize="15"
+                                    Foreground="{ThemeResource SecondaryTextBrush}"
+                                    Text="Un matériau composé de Mica, d’Acrylic, de contours spéculaires et d’interactions pilotées par le pointeur."
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+
+                            <controls:LiquidGlassCard
+                                x:Name="ToolbarCard"
+                                Grid.Column="1"
+                                Margin="20,2,0,0"
+                                Padding="7"
+                                CornerRadius="28"
+                                VerticalAlignment="Top">
+                                <StackPanel Orientation="Horizontal" Spacing="5">
+                                    <Button
+                                        Click="ThemeButton_Click"
+                                        Style="{StaticResource RoundIconButtonStyle}"
+                                        ToolTipService.ToolTip="Basculer clair/sombre">
+                                        <FontIcon Glyph="&#xE706;" FontSize="16" />
+                                    </Button>
+                                    <Button
+                                        Click="PulseButton_Click"
+                                        Style="{StaticResource RoundIconButtonStyle}"
+                                        ToolTipService.ToolTip="Déclencher une interaction">
+                                        <FontIcon Glyph="&#xE945;" FontSize="16" />
+                                    </Button>
+                                </StackPanel>
+                            </controls:LiquidGlassCard>
+                        </Grid>
+
+                        <!-- Hero glass card. -->
+                        <controls:LiquidGlassCard
+                            x:Name="HeroCard"
+                            Grid.Row="2"
+                            MinHeight="218"
+                            Padding="28"
+                            CornerRadius="32">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="250" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel MaxWidth="560" Spacing="15" VerticalAlignment="Center">
+                                    <Border
+                                        HorizontalAlignment="Left"
+                                        Padding="10,5"
+                                        Background="#20FFFFFF"
+                                        CornerRadius="12">
+                                        <TextBlock
+                                            x:Name="HeroBadgeText"
+                                            FontSize="11"
+                                            FontWeight="SemiBold"
+                                            Foreground="{ThemeResource AppAccentBrush}"
+                                            Text="SURFACE INTERACTIVE" />
+                                    </Border>
+                                    <TextBlock
+                                        x:Name="HeroTitleText"
+                                        FontSize="29"
+                                        FontWeight="SemiBold"
+                                        Foreground="{ThemeResource PrimaryTextBrush}"
+                                        Text="Le reflet suit le pointeur"
+                                        TextWrapping="Wrap" />
+                                    <TextBlock
+                                        x:Name="HeroBodyText"
+                                        FontSize="14"
+                                        Foreground="{ThemeResource SecondaryTextBrush}"
+                                        Text="Survole cette carte : son éclairage se déplace et sa surface réagit avec une animation amortie."
+                                        TextWrapping="Wrap" />
+                                    <Button
+                                        x:Name="HeroActionButton"
+                                        HorizontalAlignment="Left"
+                                        Padding="18,10"
+                                        Click="ActionButton_Click"
+                                        CornerRadius="18"
+                                        Content="Tester l’action" />
+                                </StackPanel>
+
+                                <Grid Grid.Column="1">
+                                    <Ellipse Width="178" Height="178" Fill="#18FFFFFF" />
+                                    <Ellipse Width="124" Height="124" Fill="#20FFFFFF" />
+                                    <Ellipse Width="76" Height="76" Fill="{ThemeResource AppAccentBrush}" Opacity="0.86" />
+                                    <Image Width="58" Height="58" Source="ms-appx:///Assets/AppIcon.svg" />
+                                </Grid>
+                            </Grid>
+                        </controls:LiquidGlassCard>
+
+                        <Grid Grid.Row="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="16" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <controls:LiquidGlassCard
+                                x:Name="MetricsCard"
+                                Grid.Column="0"
+                                Padding="23"
+                                CornerRadius="26">
+                                <StackPanel Spacing="17">
+                                    <StackPanel Orientation="Horizontal" Spacing="10">
+                                        <Border Width="36" Height="36" Background="#28FFFFFF" CornerRadius="13">
+                                            <FontIcon Glyph="&#xE9D9;" FontSize="17" />
+                                        </Border>
+                                        <StackPanel>
+                                            <TextBlock x:Name="MetricsTitleText" FontSize="17" FontWeight="SemiBold" Text="Recette du matériau" />
+                                            <TextBlock
+                                                x:Name="MetricsSubtitleText"
+                                                FontSize="11"
+                                                Foreground="{ThemeResource SecondaryTextBrush}"
+                                                Text="Composition actuelle" />
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <Grid ColumnSpacing="14">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" Spacing="3">
+                                            <TextBlock x:Name="MetricOneValueText" FontSize="24" FontWeight="SemiBold" Text="46 %" />
+                                            <TextBlock x:Name="MetricOneLabelText" FontSize="11" Foreground="{ThemeResource SecondaryTextBrush}" Text="Teinte" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Spacing="3">
+                                            <TextBlock x:Name="MetricTwoValueText" FontSize="24" FontWeight="SemiBold" Text="72 %" />
+                                            <TextBlock x:Name="MetricTwoLabelText" FontSize="11" Foreground="{ThemeResource SecondaryTextBrush}" Text="Luminosité" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="2" Spacing="3">
+                                            <TextBlock x:Name="MetricThreeValueText" FontSize="24" FontWeight="SemiBold" Text="1 px" />
+                                            <TextBlock x:Name="MetricThreeLabelText" FontSize="11" Foreground="{ThemeResource SecondaryTextBrush}" Text="Contour" />
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </controls:LiquidGlassCard>
+
+                            <controls:LiquidGlassCard
+                                x:Name="SettingsCard"
+                                Grid.Column="2"
+                                Padding="23"
+                                CornerRadius="26">
+                                <StackPanel Spacing="13">
+                                    <TextBlock x:Name="SettingsTitleText" FontSize="17" FontWeight="SemiBold" Text="Laboratoire" />
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="170" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock VerticalAlignment="Center" Text="Fond de fenêtre" />
+                                        <ComboBox
+                                            x:Name="BackdropSelector"
+                                            Grid.Column="1"
+                                            SelectedIndex="0"
+                                            SelectionChanged="BackdropSelector_SelectionChanged">
+                                            <ComboBoxItem Content="Mica" Tag="Mica" />
+                                            <ComboBoxItem Content="Mica Alt" Tag="MicaAlt" />
+                                            <ComboBoxItem Content="Acrylic" Tag="Acrylic" />
+                                        </ComboBox>
+                                    </Grid>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="170" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock VerticalAlignment="Center" Text="Opacité de teinte" />
+                                        <Slider
+                                            x:Name="TintSlider"
+                                            Grid.Column="1"
+                                            Minimum="0.15"
+                                            Maximum="0.88"
+                                            StepFrequency="0.01"
+                                            Value="0.46"
+                                            ValueChanged="MaterialSlider_ValueChanged" />
+                                    </Grid>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="170" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock VerticalAlignment="Center" Text="Luminosité" />
+                                        <Slider
+                                            x:Name="LuminositySlider"
+                                            Grid.Column="1"
+                                            Minimum="0.20"
+                                            Maximum="1.00"
+                                            StepFrequency="0.01"
+                                            Value="0.72"
+                                            ValueChanged="MaterialSlider_ValueChanged" />
+                                    </Grid>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock VerticalAlignment="Center" Text="Animations interactives" />
+                                        <ToggleSwitch
+                                            x:Name="MotionToggle"
+                                            Grid.Column="1"
+                                            IsOn="True"
+                                            Toggled="MotionToggle_Toggled" />
+                                    </Grid>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock VerticalAlignment="Center" Text="Forcer le repli opaque" />
+                                        <ToggleSwitch
+                                            x:Name="OpaqueToggle"
+                                            Grid.Column="1"
+                                            Toggled="OpaqueToggle_Toggled" />
+                                    </Grid>
+                                </StackPanel>
+                            </controls:LiquidGlassCard>
+                        </Grid>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
